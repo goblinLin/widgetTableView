@@ -45,9 +45,14 @@ createBasicTable = function (  )
 	        top = 0,
 	        height = 330,
 	        width = 300,
+	        isBounceEnabled = true,
+	        --isLocked = true,
+	        noLines = true,
+	        --backgroundColor = {1,0,0},
+	        hideBackground = true,
 	        onRowRender = onRowRender,
 	        onRowTouch = onRowTouch,
-	        listener = scrollListener
+	        --listener = scrollListener
 	    }
 	)
 	-- 加入 40 rows
@@ -55,6 +60,9 @@ createBasicTable = function (  )
 	    -- Insert a row into the tableView
 	    tableView:insertRow{}
 	end
+	-- tableView:scrollToIndex(15)
+	--tableView.height = 100
+
 end
 
 -- 生成含分類的TableView
@@ -102,6 +110,7 @@ end
 init = function (  )
 	--createBasicTable()
 	createCategoryTable()
+
 end
 
 --負責渲染Row
@@ -110,14 +119,15 @@ onRowRender = function ( event )
     local row = event.row
 
     -- 先暫存Row的寬高，以避免在加入子元件後被變更得不到舊的值
-    local rowHeight , rowWidth = row.contentHeight , row.contentWidth
+    --local rowHeight , rowWidth = row.contentHeight , row.contentWidth
 
     --建立Row的內容
     local rowTitle = display.newText( row, "Row " .. row.index, 0, 0, nil, 14 )
     rowTitle:setFillColor( 0 )
     rowTitle.anchorX = 0
     rowTitle.x = 0
-    rowTitle.y = rowHeight * 0.5
+    --rowTitle.y = rowHeight * 0.5
+    rowTitle.y = row.contentHeight * 0.5
 end
 
 --負責處理Row的Touch事件
